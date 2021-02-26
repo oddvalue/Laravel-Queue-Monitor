@@ -8,17 +8,17 @@ use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Carbon;
+use Throwable;
 use romanzipp\QueueMonitor\Models\Contracts\MonitorContract;
 use romanzipp\QueueMonitor\Traits\IsMonitored;
-use Throwable;
 
 class QueueMonitor
 {
-    private const TIMESTAMP_EXACT_FORMAT = 'Y-m-d H:i:s.u';
+    const TIMESTAMP_EXACT_FORMAT = 'Y-m-d H:i:s.u';
 
-    public const MAX_BYTES_TEXT = 65535;
+    const MAX_BYTES_TEXT = 65535;
 
-    public const MAX_BYTES_LONGTEXT = 4294967295;
+    const MAX_BYTES_LONGTEXT = 4294967295;
 
     public static $loadMigrations = false;
 
@@ -134,7 +134,7 @@ class QueueMonitor
      *
      * @return void
      */
-    protected static function jobFinished(JobContract $job, bool $failed = false, ?Throwable $exception = null): void
+    protected static function jobFinished(JobContract $job, bool $failed = false, $exception = null): void
     {
         if ( ! self::shouldBeMonitored($job)) {
             return;

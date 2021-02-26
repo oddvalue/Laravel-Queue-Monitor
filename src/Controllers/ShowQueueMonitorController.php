@@ -3,15 +3,19 @@
 namespace romanzipp\QueueMonitor\Controllers;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
 use romanzipp\QueueMonitor\Services\QueueMonitor;
 
-class ShowQueueMonitorController
+class ShowQueueMonitorController extends Controller
 {
+    use ValidatesRequests;
+
     public function __invoke(Request $request)
     {
-        $data = $request->validate([
+        $data = $this->validate($request, [
             'only_failed' => ['nullable'],
         ]);
 

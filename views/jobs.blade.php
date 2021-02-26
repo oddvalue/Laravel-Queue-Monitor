@@ -188,7 +188,7 @@
 
                             <td class="p-4 text-gray-800 text-sm leading-5 border-b border-gray-200">
 
-                                <form action="{{ action(romanzipp\QueueMonitor\Controllers\DeleteMonitorController::class, $job) }}" method="post">
+                                <form action="{{ action('\\'.romanzipp\QueueMonitor\Controllers\DeleteMonitorController::class.'@__invoke', $job) }}" method="post">
 
                                     @csrf
                                     @method('delete')
@@ -239,7 +239,9 @@
 
                         <div class="flex justify-between">
 
-                            <div>
+                            {{$jobs->links()}}
+
+                            {{-- <div>
                                 Showing
                                 @if($jobs->total() > 0)
                                     <span class="font-medium">{{ $jobs->firstItem() }}</span> to
@@ -260,7 +262,7 @@
                                     Next
                                 </a>
 
-                            </div>
+                            </div> --}}
 
                         </div>
 
@@ -278,10 +280,8 @@
 
         <div class="mt-12">
 
-            <form action="{{ action(romanzipp\QueueMonitor\Controllers\PurgeMonitorsController::class) }}" method="post">
-
-                @csrf
-                @method('delete')
+            <form action="{{ action('\\'.romanzipp\QueueMonitor\Controllers\PurgeMonitorsController::class.'@__invoke') }}" method="post">
+                {{csrf_field()}}
 
                 <button class="px-3 py-1 bg-red-200 hover:bg-red-300 text-red-800 text-xs font-medium uppercase tracking-wider text-white rounded">
                     Delete all entries

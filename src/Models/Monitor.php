@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
-use romanzipp\QueueMonitor\Models\Contracts\MonitorContract;
 use Throwable;
+use romanzipp\QueueMonitor\Models\Contracts\MonitorContract;
 
 /**
  * @property int id
@@ -102,7 +102,7 @@ class Monitor extends Model implements MonitorContract
      *--------------------------------------------------------------------------
      */
 
-    public function getStartedAtExact(): ?Carbon
+    public function getStartedAtExact()
     {
         if (null === $this->started_at_exact) {
             return null;
@@ -111,7 +111,7 @@ class Monitor extends Model implements MonitorContract
         return Carbon::parse($this->started_at_exact);
     }
 
-    public function getFinishedAtExact(): ?Carbon
+    public function getFinishedAtExact()
     {
         if (null === $this->finished_at_exact) {
             return null;
@@ -195,7 +195,7 @@ class Monitor extends Model implements MonitorContract
      *
      * @return \Throwable|null
      */
-    public function getException(bool $rescue = true): ?Throwable
+    public function getException(bool $rescue = true)
     {
         if (null === $this->exception_class) {
             return null;
@@ -217,7 +217,7 @@ class Monitor extends Model implements MonitorContract
      *
      * @return string|null
      */
-    public function getBasename(): ?string
+    public function getBasename()
     {
         if (null === $this->name) {
             return null;

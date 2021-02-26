@@ -43,7 +43,7 @@ class QueueMonitorProvider extends ServiceProvider
             'queue-monitor'
         );
 
-        Route::mixin(new QueueMonitorRoutes());
+        // Route::mixin(new QueueMonitorRoutes());
 
         /** @var QueueManager $manager */
         $manager = app(QueueManager::class);
