@@ -128,7 +128,7 @@ trait IsMonitored
      *
      * @return MonitorContract|null
      */
-    protected function getQueueMonitor(): ?MonitorContract
+    protected function getQueueMonitor()
     {
         if ( ! property_exists($this, 'job')) {
             return null;
