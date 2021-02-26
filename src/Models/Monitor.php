@@ -2,12 +2,12 @@
 
 namespace romanzipp\QueueMonitor\Models;
 
+use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Carbon;
 use Throwable;
 use romanzipp\QueueMonitor\Models\Contracts\MonitorContract;
 

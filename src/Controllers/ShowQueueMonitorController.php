@@ -16,7 +16,7 @@ class ShowQueueMonitorController extends Controller
     public function __invoke(Request $request)
     {
         $data = $this->validate($request, [
-            'only_failed' => ['nullable'],
+            'only_failed' => ['filled'],
         ]);
 
         $filters = [

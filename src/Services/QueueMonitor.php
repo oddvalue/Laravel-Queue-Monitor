@@ -2,12 +2,12 @@
 
 namespace romanzipp\QueueMonitor\Services;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Queue\Job as JobContract;
 use Illuminate\Queue\Events\JobExceptionOccurred;
 use Illuminate\Queue\Events\JobFailed;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
-use Illuminate\Support\Carbon;
 use Throwable;
 use romanzipp\QueueMonitor\Models\Contracts\MonitorContract;
 use romanzipp\QueueMonitor\Traits\IsMonitored;
@@ -108,6 +108,7 @@ class QueueMonitor
     protected static function jobStarted(JobContract $job): void
     {
         if ( ! self::shouldBeMonitored($job)) {
+            dd('not here');
             return;
         }
 
@@ -115,7 +116,7 @@ class QueueMonitor
 
         $model = self::getModel();
 
-        $model::query()->create([
+        \romanzipp\QueueMonitor\Models\Monitor::create([
             'job_id' => self::getJobId($job),
             'name' => $job->resolveName(),
             'queue' => $job->getQueue(),
