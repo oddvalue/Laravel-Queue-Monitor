@@ -41,7 +41,7 @@ class QueueMonitor
      *
      * @return void
      */
-    public static function handleJobProcessing(JobProcessing $event): void
+    public static function handleJobProcessing(JobProcessing $event)
     {
         self::jobStarted($event->job);
     }
@@ -53,7 +53,7 @@ class QueueMonitor
      *
      * @return void
      */
-    public static function handleJobProcessed(JobProcessed $event): void
+    public static function handleJobProcessed(JobProcessed $event)
     {
         self::jobFinished($event->job);
     }
@@ -65,7 +65,7 @@ class QueueMonitor
      *
      * @return void
      */
-    public static function handleJobFailed(JobFailed $event): void
+    public static function handleJobFailed(JobFailed $event)
     {
         self::jobFinished($event->job, true, $event->exception);
     }
@@ -77,7 +77,7 @@ class QueueMonitor
      *
      * @return void
      */
-    public static function handleJobExceptionOccurred(JobExceptionOccurred $event): void
+    public static function handleJobExceptionOccurred(JobExceptionOccurred $event)
     {
         self::jobFinished($event->job, true, $event->exception);
     }
@@ -105,7 +105,7 @@ class QueueMonitor
      *
      * @return void
      */
-    protected static function jobStarted(JobContract $job): void
+    protected static function jobStarted(JobContract $job)
     {
         if ( ! self::shouldBeMonitored($job)) {
             dd('not here');
@@ -135,7 +135,7 @@ class QueueMonitor
      *
      * @return void
      */
-    protected static function jobFinished(JobContract $job, bool $failed = false, $exception = null): void
+    protected static function jobFinished(JobContract $job, bool $failed = false, $exception = null)
     {
         if ( ! self::shouldBeMonitored($job)) {
             return;
@@ -146,7 +146,7 @@ class QueueMonitor
         $monitor = $model::query()
             ->where('job_id', self::getJobId($job))
             ->where('attempt', $job->attempts())
-            ->orderByDesc('started_at')
+            ->orderBy('started_at', 'desc')
             ->first();
 
         if (null === $monitor) {
@@ -157,7 +157,7 @@ class QueueMonitor
         $now = Carbon::now();
 
         if ($startedAt = $monitor->getStartedAtExact()) {
-            $timeElapsed = (float) $startedAt->diffInSeconds($now) + $startedAt->diff($now)->f;
+            $timeElapsed = (float) $startedAt->diffInSeconds($now) + $startedAt->diff($now)->format('u');
         }
 
         /** @var IsMonitored $resolvedJob */

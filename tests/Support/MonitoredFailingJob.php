@@ -8,7 +8,7 @@ class MonitoredFailingJob extends BaseJob
 {
     use IsMonitored;
 
-    public function handle(): void
+    public function handle()
     {
         throw new IntentionallyFailedException('Whoops');
     }

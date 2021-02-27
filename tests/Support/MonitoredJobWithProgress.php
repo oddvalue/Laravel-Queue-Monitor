@@ -15,7 +15,7 @@ class MonitoredJobWithProgress extends BaseJob
         $this->progress = $progress;
     }
 
-    public function handle(): void
+    public function handle()
     {
         $this->queueProgress(
             $this->progress

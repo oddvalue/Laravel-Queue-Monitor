@@ -13,7 +13,7 @@ class MonitoredPartiallyKeptFailingJob extends BaseJob
         return false;
     }
 
-    public function handle(): void
+    public function handle()
     {
         throw new IntentionallyFailedException('Whoops');
     }

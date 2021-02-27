@@ -8,7 +8,7 @@ class MonitoredJobWithMergedDataConflicting extends BaseJob
 {
     use IsMonitored;
 
-    public function handle(): void
+    public function handle()
     {
         $this->queueData([
             'foo' => 'old',

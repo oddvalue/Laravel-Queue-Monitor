@@ -14,7 +14,7 @@ class TestCase extends BaseTestCase
 {
     use DatabaseMigrations;
 
-    public function setUp(): void
+    public function setUp()
     {
         QueueMonitor::$loadMigrations = true;
 
@@ -48,7 +48,7 @@ class TestCase extends BaseTestCase
         return $this;
     }
 
-    protected function workQueue(): void
+    protected function workQueue()
     {
         $this->artisan('queue:work --once --sleep 1');
     }
