@@ -15,7 +15,8 @@ class ShowQueueMonitorController extends Controller
 
     public function __invoke(Request $request)
     {
-        $data = $this->validate($request, [
+        $data = $request;
+        $this->validate($request, [
             'only_failed' => ['filled'],
         ]);
 
@@ -26,7 +27,7 @@ class ShowQueueMonitorController extends Controller
         $jobs = QueueMonitor::getModel()
             ->newQuery()
             ->when($filters['onlyFailed'], static function (Builder $builder) {
-                $builder->where('failed', 1);
+                return $builder->where('failed', 1);
             })
             ->ordered()
             ->paginate(
