@@ -13,9 +13,7 @@ class PurgeMonitorsController extends Controller
     {
         $model = QueueMonitor::getModel();
 
-        $model->newQuery()->each(function (MonitorContract $monitor) {
-            $monitor->delete();
-        }, 200);
+        $model->newQuery()->delete();
 
         return redirect()->action('\\'.ShowQueueMonitorController::class.'@__invoke');
     }
